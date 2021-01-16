@@ -6,28 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- link a google font here -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="./assets/style.css" />
     <title>Weather Dashboard</title>
 </head>
 
-<body class="flex-column min-100-vh">
+<body class="flex-column">
     <header class="hero">
-        <h1 class="app-title">Weather Dashboard</h1>
+        <h1>Weather Dashboard</h1>
     </header>
 
-    <main class="flex-row justify-space-between">
-        <div class="col-12 col-md-4">
-            <div class="card">
-                <h3 class="card-header text-uppercase">Search By City</h3>
-                <form id="user-form" class="card-body">
-                <label class="form-label" for="cityName">Type a City Name</label>
-                <input name="cityName" id="cityName" type="text" autofocus="true" class="form-input" />
-                <button type="submit" class="btn">Search</button>
-                </form>
+    <main class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="aside">
+                    <h2>Search for a City</h2>
+                    <input name="cityName" id="cityInput" type="text" autofocus="true" class="form-input" />
+                    <button type="submit" id="searchButton" class="btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row flex-column" id="currentWeather">
+                    <h3 id="displayName"></h3>
+                    <h3 id="date"></h3>
+                    <h3 id="icon"></h3>
+                    <p id="temperatureEl"></p>
+                    <p id="humidityEl"></p>
+                    <p id="windSpeedEl"></p>
+                </div>
             </div>
         </div>
-        <div class="col-12 col-md-8"></div>
     </main>
 
     </main>
