@@ -39,6 +39,15 @@ main {
     
 }
 
+.card {
+    margin: 0 0 20px 0;
+    border: 3px solid blue;
+}
+
+.card-body {
+    padding: 2.5%;
+}
+
 /* FLEX CONTENT */
 .flex-row {
     display: flex;
@@ -83,5 +92,24 @@ main {
     align-items: center;
   }
   
- 
-  
+ /* UV Index Class */
+
+.low {
+  background-color: #198754 ;
+}
+
+.moderate {
+  background-color: #ffc107;
+}
+
+.high {
+  background-color: #fd7e14;
+}
+
+.very-high {
+  background-color: #dc3545;
+}
+
+.extreme {
+  background-color: #6f42c1;
+}
