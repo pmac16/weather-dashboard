@@ -4,8 +4,8 @@
 
 body {
     background-color: white;
-    margin: 0;
-    padding: 0;
+    margin: 10px;
+    padding: opx;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: black;
     line-height: 1.5;
@@ -13,25 +13,25 @@ body {
   }
 
 main {
-    margin: 20px auto;
-    width: 94%;
+    margin: 0px;
+    width: 100%;
 }
+
 .hero {
     background-color: black;
     color: white;
-    text-align: right;
+    text-align: center;
 
 }
 
 .btn {
-    background-color: blue;
     color: white;
 }
 
 
 .aside {
-    background-color: lightgray;
-    padding: 8px;
+    padding: 0px;
+    width: 100%;
 }
 .current {
     border: 1px solid lightgray;
@@ -39,15 +39,14 @@ main {
     
 }
 
-.card {
-    margin: 0 0 20px 0;
-    border: 3px solid blue;
+/* Cards */
+.heading {
+  font-size:larger;
 }
 
-.card-body {
-    padding: 2.5%;
+.info {
+  font-weight: lighter;
 }
-
 /* FLEX CONTENT */
 .flex-row {
     display: flex;

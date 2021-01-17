@@ -23,26 +23,31 @@
     <main class="container-fluid">
         <div class="row">
             <div class="col-md-4">
-                <div class="aside">
-                    <h2>Search for a City</h2>
+                <div class="aside bg-light">
+                    <h2>Search for a City:</h2>
                     <input name="cityName" id="cityInput" type="text" autofocus="true" class="form-input" />
-                    <button type="submit" id="searchButton" class="btn"><i class="fas fa-search"></i></button>
+                    <button type="submit" id="searchButton" class="btn bg-primary"><i class="fas fa-search"></i></button>
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="row flex-column" id="currentWeather">
                     <h3 id="displayName"></h3>
-                    <h3 id="date"></h3>
-                    <h3 id="icon"></h3>
+                    <img id="icon" />
                     <p id="temperatureEl"></p>
                     <p id="humidityEl"></p>
                     <p id="windSpeedEl"></p>
                     <p id="uvindexEl"></p>
                 </div>
-                <div class="row flex-column justify-space-between">
-                    <br>
-                    <h3>5-Day Forecast:</h3>
-                    <div class="card" id="weatherForecast"></div>
+                <br>
+                <div class="row" id="forecastTitle">
+                    <div class = "col-12">
+                        <div class = "row" id="weatherForecast"></div>
+
+                    </div>
+                    
+                    
+                    
+            
                 </div>
             </div>
             

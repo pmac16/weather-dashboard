@@ -1,69 +1,63 @@
+// Globa Variables
+var searchButton = document.querySelector("#searchButton");
+var date= moment().format('l');  
+
 //current weather variables
 var weatherContainerEl = document.querySelector("#currentWeather");
 var temperatureEl = document.querySelector("#temperatureEl");
 var humidityEl = document.querySelector("#humidityEl");
 var nameEl= document.querySelector("#displayName");
-var dateEl = document.querySelectorAll("#date")
+var dateEl = document.querySelector("#date")
 var windSpeedEl = document.querySelector("#windSpeedEl")
 var uvindexEl = document.querySelector("#uvindexEl")
+var icon = document.querySelector("#icon");
 
 //5 day forecast variables
-var searchButton = document.querySelector("#searchButton");
-var date= moment().format('l');   
 var weatherForecastEl = document.querySelector("#weatherForecast");
-var forecastTempEl = document.querySelectorAll("#forecastTemp");
+var forecastTempEl = document.querySelector("#forecastTemp");
+var heading = document.querySelector("#forecastTitle");
+
+var day1El= document.querySelector('#day1');
+var day2El= document.querySelector('#day2');
+var day3El= document.querySelector('#day3');
+var day4El= document.querySelector('#day4');
+var day5El= document.querySelector('#day5');
 
 //function to display current weather 
 function getCurrentWeather(event) {
    //somehow save to local storage 
 
-   event.preventDefault();
+  event.preventDefault();
    
-
-    var cityName = document.querySelector("#cityInput").value;
+  var cityName = document.querySelector("#cityInput").value;
    //put something if there is nothing typed ==> look at I did in activities
     
-   var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=d82bfc455a2993361e5a198ea2592aaa&units=imperial";
+  var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=d82bfc455a2993361e5a198ea2592aaa&units=imperial";
 
   fetch(apiUrl)
       .then(function(response) {
           return response.json()
       })
       .then(function(data) {
-          
+        
+        
         var lat = data.coord.lat;
         var lon = data.coord.lon;
+        getForecast(lat, lon);
 
-        console.log(lat)
-
-        var name = document.createElement("h3");
-        name.textContent = cityName 
-        nameEl.appendChild(name);
-
-        // var displayDate = document.createElement("h3");
-        // displayDate.textContent = date
-        // dateEl.appendChild(displayDate);
-
-        var icon = document.createElement("img");
+        // var icon = document.createElement("img");
         icon.setAttribute('src', "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
-        nameEl.appendChild(icon);
-
-        var temperature = document.createElement("p");
-        temperature.textContent = 'Temperature: ' + data.main.temp + '°F';
-        temperatureEl.appendChild(temperature);
-
-        var humidity = document.createElement("p");
-        humidity.textContent = 'Humidity: ' + data.main.humidity + '%';
-        humidityEl.appendChild(humidity);
-
-        var windSpeed = document.createElement("p");
-        windSpeed.textContent = 'Wind Speed: ' + data.wind.speed + 'MPH';
-        windSpeedEl.appendChild(windSpeed);
-
-       
-
+        // nameEl.appendChild(icon);
         
-        weatherContainerEl.className = "current";
+
+        //date
+        nameEl.textContent = cityName + ' (' + date + ')';
+        temperatureEl.textContent = 'Temperature: ' + data.main.temp + '°F';
+        humidityEl.textContent = 'Humidity: ' + data.main.humidity + '%';
+        windSpeedEl.textContent = 'Wind Speed: ' + data.wind.speed + 'MPH';
+       
+        weatherContainerEl.className = "bg-light";
+        weatherContainerEl.appendChild(nameEl);
         weatherContainerEl.appendChild(temperatureEl)
         weatherContainerEl.appendChild(humidityEl);
         weatherContainerEl.appendChild(windSpeedEl)
@@ -77,22 +71,19 @@ function getCurrentWeather(event) {
 
           })
           .then(function(data) {
-            
-            var uvindex = document.createElement("p");
-            uvindex.textContent = 'UV Index: ' + data.value;
-            uvindexEl.appendChild(uvindex);
+            uvindexEl.textContent = 'UV Index: ' + data.value;
             weatherContainerEl.appendChild(uvindexEl);
 
             if (data.value <2) {
-              uvindex.classList.add("low");
+              uvindexEl.classList.add("low");
             } else  if (data.value <5) {
-              uvindex.classList.add("moderate")
+              uvindexEl.classList.add("moderate")
             } else if (data.value <7) {
-              uvindex.classList.add("high")
+              uvindexEl.classList.add("high")
             } else if (data.value < 10) {
-              uvindex.classList.add("very-high")
+              uvindexEl.classList.add("very-high")
             } else {
-              uvindex.classList.add("extreme")
+              uvindexEl.classList.add("extreme")
             }
 
           })
@@ -100,52 +91,53 @@ function getCurrentWeather(event) {
     })  
 }
         
-function getForecast() {
-    var cityName = document.querySelector("#cityInput").value;
-    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName  + "&appid=d82bfc455a2993361e5a198ea2592aaa";
+function getForecast(lat,lon) {
+    // var cityName = document.querySelector("#cityInput").value;
+    var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + '&lon=' + lon + "&appid=f04424bed1e08dfe10e6a628ec049266&units=imperial";
 
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
           response.json().then(function(data) {
             
-            //loop over days
-            for (var i = 0; i < data.list.length; i++) {
-                // var singleDayData = response.list[i];
+            for (var i = 0; i < 5; i++) {
+                var temperature = data.daily[i].temp.day;
+                var humidity = data.daily[i].humidity;
 
                 //create a card for each day
-                var cardEl = document.createElement("card");
-                cardEl.classList = "card-body flex-row justify-space-between";
+                var forecastEl= document.createElement("div");
+                forecastEl.classList = "col bg-primary text-white ml-3 mb-3 rounded";
+               
+                // heading.textContent = '<h3 5 Day Forecast</h3>';
                 
-                weatherForecastEl.appendChild(cardEl)
+                var dateEl = document.createElement("div");
+                dateEl.textContent = date;
+                dateEl.className = "heading";
+                forecastEl.appendChild(dateEl);
+
+                var iconEl = document.createElement("img");
+                iconEl.setAttribute('src', "https://openweathermap.org/img/w/" + data.daily[0].weather[0].icon + ".png");
+                forecastEl.appendChild(iconEl);
+
+                var temperatureEl = document.createElement("div");
+                temperatureEl.textContent= 'Temp: ' + temperature + '°F';
+                temperatureEl.className = "info";
+                forecastEl.appendChild(temperatureEl);
+
+                var humidityEl = document.createElement("div");
+                humidityEl.className = "info";
+                humidityEl.textContent = 'Humidity: ' + humidity + '%';
+                forecastEl.appendChild(humidityEl);
+                
+                weatherForecastEl.appendChild(forecastEl);
             }
-            
           });
         }
         else {
           alert("There was a problem with your request!");
         }
       });
-    
 }
 
 
 
-// function getSearchValue() {
-//     var searchValue = document.querySelector("#SearchButton").value
-// }
-//   function getSearchVal() {
-//       var searchValue = document.querySelector
-//   }
-//     //get serach value = doc.selector.value
-//     function searchWeather (searchValue) {
-//         //
-//     }
-
-//     function getForecast(searchValue) {}
-//     function getUVIndex(lat&lon) {}
-//     //get forecast funciton (serachValue)
-//     //get uvindex (lat & long)
-
-
 searchButton.addEventListener("click", getCurrentWeather)
-searchButton.addEventListener("click", getForecast)
