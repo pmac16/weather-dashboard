@@ -30,12 +30,14 @@ main {
 
 
 .aside {
-    padding: 0px;
+    padding: 0px auto auto 0px;
     width: 100%;
 }
 .current {
     border: 1px solid lightgray;
+    background-color: white;
     padding: 10px;
+    margin: 10px auto;
     
 }
 
