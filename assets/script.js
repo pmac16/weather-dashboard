@@ -28,7 +28,6 @@ var searchEl=document.querySelector('#searchResults')
 
 //function to display current weather 
 function getCurrentWeather(event) {
-   //somehow save to local storage 
 
   event.preventDefault();
 
@@ -36,7 +35,7 @@ function getCurrentWeather(event) {
   weatherForecastEl.innerHTML="";
    
   var cityName = document.querySelector("#cityInput").value;
-   //put something if there is nothing typed ==> look at I did in activities
+   
     
   var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=d82bfc455a2993361e5a198ea2592aaa&units=imperial";
 
@@ -51,9 +50,9 @@ function getCurrentWeather(event) {
         var lon = data.coord.lon;
         getForecast(cityName, lat, lon);
 
-        // var icon = document.createElement("img");
+   
         icon.setAttribute('src', "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
-        // nameEl.appendChild(icon);
+        
         
 
         //date
@@ -148,7 +147,7 @@ function savedSearch(cityName) {
         var forecastEl= document.createElement("div");
         forecastEl.classList = "col bg-primary text-white ml-3 mb-3 rounded";
        
-        // heading.textContent = '<h3 5 Day Forecast</h3>';
+        
         
         var dateEl = document.createElement("div");
         dateEl.textContent = date;
@@ -176,7 +175,7 @@ function savedSearch(cityName) {
 
         
 function getForecast(cityName, lat,lon) {
-    // var cityName = document.querySelector("#cityInput").value;
+    
     var apiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + '&lon=' + lon + "&appid=f04424bed1e08dfe10e6a628ec049266&units=imperial";
 
     fetch(apiUrl).then(function(response) {
@@ -191,7 +190,7 @@ function getForecast(cityName, lat,lon) {
                 var forecastEl= document.createElement("div");
                 forecastEl.classList = "col bg-primary text-white ml-3 mb-3 rounded";
                
-                // heading.textContent = '<h3 5 Day Forecast</h3>';
+               
                 
                 var dateEl = document.createElement("div");
                 dateEl.textContent = date;
@@ -222,10 +221,6 @@ function getForecast(cityName, lat,lon) {
         }
       });
 }
-
-//store the info for the city as an object
-//display the city names under the search in a div
-//when you click the name it pulls up the city information again
 
 
 
