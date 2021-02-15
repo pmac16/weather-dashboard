@@ -11,6 +11,8 @@
 
   * [Usage](#usage)
 
+  * [Deployed Site](#deployedsite)
+
   * [Screenshot](#screenshot)
 
   * [Contribution](#contribution)
@@ -24,6 +26,10 @@
   <br>
 
   I can see all cities I have searched displayed under the search bar. If I click back to a city, I am presented with the weather data again.
+
+  ## Deployed Site
+
+  Visit the site by clicking [here](https://pmac16.github.io/weather-dashboard).
 
   ## Screenshot 
 
